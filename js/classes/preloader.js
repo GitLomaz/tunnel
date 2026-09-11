@@ -8,6 +8,7 @@ function preloader() {
   scene.load.image("attackBar", "images/attackBar.png");
   scene.load.image("skillBar", "images/skillBar.png");
   scene.load.image("skillBarTint", "images/skillBarTint.png");
+  scene.load.image("pixel3", "images/pixel3.png");
 
   scene.load.image("16x16", "images/sheets/16x16.png");
   scene.load.image("32x32", "images/sheets/32x32.png");
@@ -24,5 +25,12 @@ function preloader() {
   scene.load.spritesheet("player", "images/player.png", {
     frameWidth: 48,
     frameHeight: 48,
+  });
+
+  ["mimic", "blob", "bull", "spore", "mage", "bigBlob", "iceTotem"].forEach((enemy) => {
+      scene.load.spritesheet(enemy, "images/enemies/" + enemy + ".png", {
+        frameWidth: 48,
+        frameHeight: 48,
+      });
   });
 }

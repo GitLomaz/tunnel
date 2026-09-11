@@ -2,7 +2,7 @@ class Player extends Phaser.GameObjects.Container {
   // static counter = 0;
 
   constructor() {
-    super(scene, 600, 600);
+    super(scene, 4460, 220);
     this.shadow = scene.add.sprite(0, 24, "shadow");
     this.shadow.setScale(0.75);
     this.shadow.setAlpha(0.3);

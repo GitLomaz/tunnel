@@ -18,7 +18,9 @@ let gameScene = new Phaser.Class({
     this.big = this.map.addTilesetImage("48x48", "48x48", 32, 32);
     this.huge = this.map.addTilesetImage("64x64", "64x64", 32, 32);
     this.layer1 = this.map.createLayer("ground", [this.smol, this.med, this.big, this.huge], 0, 0);
-    this.layer2 = this.map.createLayer("doodads", [this.smol, this.med, this.big, this.huge], 0, 0);
+    this.layer2 = this.map.createLayer("floor", [this.smol, this.med, this.big, this.huge], 0, 0);
+    this.layer3 = this.map.createLayer("doodads", [this.smol, this.med, this.big, this.huge], 0, 0);
+    this.waypoints = this.map.objects[0].objects.map((obj, i) => ({i: i, x: obj.x, y: obj.y }));
 
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -35,15 +37,27 @@ let gameScene = new Phaser.Class({
 
     this.player = new Player();
 
+    this.enemies = this.physics.add.group();
+
+    scene.physics.add.collider(this.enemies);
+
+
+
     this.anims.create({
       key: "slash",
       frames: this.anims.generateFrameNumbers("slash"),
       frameRate: 30,
       repeat: 0,
     });
+
+    // Load inital level stuffs
+    this.blobSpawner = new BlobSpawner();
   },
     
   update: function (time) {
     this.player.tick();
+      scene.enemies.children.entries.forEach((e) => {
+      e.tick();
+    });
   },
 });
