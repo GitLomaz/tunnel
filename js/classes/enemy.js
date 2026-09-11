@@ -69,7 +69,7 @@ class Enemy extends Phaser.GameObjects.Container {
     if (this.healthBar.alpha === 0) {
       this.showHealthbar();
     }
-    sc.play("hit_" + Phaser.Math.Between(1, 2) + ".mp3", 0.4, false, true);
+    // sc.play("hit_" + Phaser.Math.Between(1, 2) + ".mp3", 0.4, false, true);
     this.damageFlash = 25;
     this.applyKnockback(force);
     this.health = this.health - damage;
@@ -91,19 +91,19 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   die(force) {
-    scene.player.addScore(this.points);
-    for (let x = this.points * 1.5; x > 0; x = x - 50) {
-      let points = new PointDrop(this.x, this.y, 50);
-      points.body.setVelocityX(force.x * getRandomInt(100, 400));
-      points.body.setVelocityY(force.y * getRandomInt(100, 400));
-    }
-    for (let i = 0; i < 2; i++) {
-      if (oneIn(10)) {
-        let health = new HealthDrop(this.x, this.y, 10);
-        health.body.setVelocityX(force.x * getRandomInt(100, 400));
-        health.body.setVelocityY(force.y * getRandomInt(100, 400));
-      }
-    }
+    // scene.player.addScore(this.points);
+    // for (let x = this.points * 1.5; x > 0; x = x - 50) {
+    //   let points = new PointDrop(this.x, this.y, 50);
+    //   points.body.setVelocityX(force.x * getRandomInt(100, 400));
+    //   points.body.setVelocityY(force.y * getRandomInt(100, 400));
+    // }
+    // for (let i = 0; i < 2; i++) {
+    //   if (oneIn(10)) {
+    //     let health = new HealthDrop(this.x, this.y, 10);
+    //     health.body.setVelocityX(force.x * getRandomInt(100, 400));
+    //     health.body.setVelocityY(force.y * getRandomInt(100, 400));
+    //   }
+    // }
     this.destroy();
   }
 

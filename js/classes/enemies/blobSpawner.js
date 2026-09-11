@@ -7,6 +7,7 @@ class BlobSpawner extends Enemy {
     this.shadow.setScale(0.7);
     this.setSize(25, 0);
     this.body.setCircle(13);
+    this.body.setImmovable(true);
     this.health = 10;
     this.healthMax = 10;
     this.points = getRandomInt(20, 120);

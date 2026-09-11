@@ -291,5 +291,34 @@ class Player extends Phaser.GameObjects.Container {
       },
       spr
     );
+    let hit = false;
+    let interaction = false;
+    do {
+      interaction = false;
+      scene.enemies.children.entries.forEach(e => {
+        if (e && e.type === "enemy") {
+          let d = Phaser.Math.Distance.Between(this.x, this.y, e.x, e.y);
+          if (d < attackType.range) {
+            let a = Phaser.Math.Angle.Between(this.x, this.y, e.x, e.y);
+            let delta = Math.abs(
+              Phaser.Math.Angle.Wrap(Phaser.Math.DegToRad(this.playerAngle) - a)
+            );
+            if (delta < attackType.arc && e.damageFlash === 0) {
+              hit = true;
+              let x = Math.cos(a);
+              let y = Math.sin(a);
+              e.takeDamage(attackType.damage, {
+                x: x * attackType.modifer,
+                y: y * attackType.modifer,
+              });
+              interaction = true;
+            }
+          }
+        }
+      });
+    } while (interaction);
+    if (hit) {
+      this.hitCounter++;
+    }
   }
 }
