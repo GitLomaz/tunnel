@@ -2,7 +2,7 @@ class Player extends Phaser.GameObjects.Container {
   // static counter = 0;
 
   constructor() {
-    super(scene, 4460, 220);
+    super(scene, 9000, 220);
     this.shadow = scene.add.sprite(0, 24, "shadow");
     this.shadow.setScale(0.75);
     this.shadow.setAlpha(0.3);
@@ -16,7 +16,7 @@ class Player extends Phaser.GameObjects.Container {
     scene.physics.add.existing(this);
     this.add(this.player);
     this.body.setCircle(9);
-    this.body.setImmovable();
+    this.body.setImmovable(false);
     this.attackCooldown = 0;
     this.magnet = 150;
     this.coins = 0;

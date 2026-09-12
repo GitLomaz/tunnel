@@ -85,9 +85,11 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   applyKnockback(force, randomizer = 400) {
-    this.body.setVelocityX(force.x * getRandomInt(100, randomizer));
-    this.body.setVelocityY(force.y * getRandomInt(100, randomizer));
-    this.knockback = 10;
+    if (!this.body.immovable) {
+      this.body.setVelocityX(force.x * getRandomInt(100, randomizer));
+      this.body.setVelocityY(force.y * getRandomInt(100, randomizer));
+      this.knockback = 10;
+    }
   }
 
   die(force) {

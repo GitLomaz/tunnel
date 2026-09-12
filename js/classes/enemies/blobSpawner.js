@@ -1,7 +1,7 @@
 class BlobSpawner extends Enemy {
   // static counter = 0;
 
-  constructor(x = 2225, y = 280, spanAnim = true) {
+  constructor(x = 6600 , y = 280, spanAnim = true) {
 
     super(x, y, "blob", 22, spanAnim);
     this.shadow.setScale(0.7);
@@ -26,7 +26,7 @@ class BlobSpawner extends Enemy {
 
   tick() {
     super.tick();
-    if (this.ticks > 500) {
+    if (this.ticks > 250) {
       console.log('spawning')
       this.ticks = 0;
       this.cohort.push(new Blob(getRandomInt(this.x - 50, this.x + 50), getRandomInt(this.y - 50, this.y + 50)));

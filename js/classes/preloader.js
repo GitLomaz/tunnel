@@ -10,12 +10,13 @@ function preloader() {
   scene.load.image("skillBarTint", "images/skillBarTint.png");
   scene.load.image("pixel3", "images/pixel3.png");
 
+  scene.load.image("16x16L", "images/sheets/16x16L.png");
   scene.load.image("16x16", "images/sheets/16x16.png");
   scene.load.image("32x32", "images/sheets/32x32.png");
   scene.load.image("48x48", "images/sheets/48x48.png");
   scene.load.image("64x64", "images/sheets/64x64.png");
 
-  scene.load.tilemapTiledJSON("map", "data/map.tmj");
+  scene.load.tilemapTiledJSON("map", "data/map2.tmj");
 
   scene.load.spritesheet("slash", "images/slash.png", {
     frameWidth: 32,
