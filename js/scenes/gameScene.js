@@ -38,23 +38,12 @@ let gameScene = new Phaser.Class({
     });
     this.mouse = this.input.activePointer;
 
-
-    
-
     this.enemies = this.physics.add.group();
     this.walls = this.physics.add.staticGroup();
-    // this.wallObjects.forEach(obj => {
-    //   this.walls.create(obj.x + obj.width / 2, obj.y + obj.height / 2, null).setOrigin(0.5, 0.5).setDisplaySize(obj.width, obj.height).refreshBody();
-    // });
-
 
     this.wallObjects.forEach(obj => {
       const wall = this.walls
-        .create(
-          obj.x + obj.width / 2,
-          obj.y + obj.height / 2,
-          null
-        )
+        .create(obj.x + obj.width / 2, obj.y + obj.height / 2, null)
         .setOrigin(0.5)
         .setDisplaySize(obj.width, obj.height)
         .refreshBody();
@@ -62,12 +51,23 @@ let gameScene = new Phaser.Class({
       wall.setVisible(false); // invisible collision wall
     });
 
+    scene.physics.add.collider(this.enemies);
+    scene.physics.add.collider(this.enemies, this.player, null, (player, enemy) => {
+      const dx = enemy.body.center.x - player.body.center.x;
+      const dy = enemy.body.center.y - player.body.center.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const overlap = enemy.body.radius + player.body.radius - dist;
+      if (overlap > 0) {
+        enemy.x += (dx / dist) * overlap;
+        enemy.y += (dy / dist) * overlap;
+        enemy.body.updateFromGameObject();
+      }
+      return false;
+    });
     scene.physics.add.collider(this.enemies, this.walls);
     scene.physics.add.collider(this.player, this.walls);
-    scene.physics.add.collider(this.enemies);
-    scene.physics.add.collider(this.enemies, this.player);
 
-
+    NightLighting.init(this, this.player);
 
     this.anims.create({
       key: "slash",
@@ -85,5 +85,6 @@ let gameScene = new Phaser.Class({
       scene.enemies.children.entries.forEach((e) => {
       e.tick();
     });
+    NightLighting.update(time);
   },
 });
